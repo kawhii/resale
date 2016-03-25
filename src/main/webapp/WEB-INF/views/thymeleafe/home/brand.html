@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!--首页品牌-->
+<div th:each="brand : ${brands}" class="col-md-2 focus-grid">
+    <a href="#">
+        <div class="focus-border">
+            <div class="focus-layout">
+                <div class="focus-image"><i th:class="'fa fa-' + ${brand.cssName}"></i></div>
+                <h4 class="clrchg" th:text="${brand.name}"></h4>
+            </div>
+        </div>
+    </a>
+</div>
+</html>

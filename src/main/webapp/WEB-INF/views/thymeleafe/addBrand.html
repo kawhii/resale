@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+    <title>添加品牌</title>
+</head>
+<body>
+<form method="post" th:object="${brand}">
+    <table>
+        <tr>
+            <td>品牌名称</td>
+            <td>
+                <input type="text" th:field="*{name}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>品牌编码</td>
+            <td>
+                <input type="text" th:field="*{code}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>品牌序号</td>
+            <td>
+                <input type="number" th:field="*{order}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>品牌样式</td>
+            <td>
+                <input type="text" th:field="*{cssName}"/>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" id="button_submit" value="提交"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
