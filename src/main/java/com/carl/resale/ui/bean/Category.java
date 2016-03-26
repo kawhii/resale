@@ -105,4 +105,20 @@ public class Category {
     public void setBusiness(String business) {
         this.business = business;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", order=" + order +
+                ", cssName='" + cssName + '\'' +
+                ", state=" + state +
+                ", goodsCount=" + goodsCount +
+                ", imageId=" + imageId +
+                ", specTypes=" + specTypes +
+                ", business='" + business + '\'' +
+                '}';
+    }
 }

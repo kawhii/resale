@@ -408,9 +408,6 @@
                         </div>
                     </div>
                 </div>
-                <script>
-                    $('#myModal').modal('');
-                </script>
             </div>
         </div>
     </div>

@@ -1,7 +1,10 @@
 package com.carl.resale.ui.ctrl.welcome;
 
 import com.carl.resale.ui.bean.Categories;
+import com.carl.resale.ui.bean.Category;
 import com.carl.resale.ui.service.ICategoriesDaoService;
+import com.carl.resale.ui.service.ICategoryService;
+import com.carl.resale.ui.service.impl.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Controller;
@@ -21,11 +24,7 @@ public class HomePageCtrl {
     private MongoTemplate mongoTemplate;
 
     @Autowired
-    private ICategoriesDaoService categoriesService;
-
-    public void setCategoriesService(ICategoriesDaoService categoriesService) {
-        this.categoriesService = categoriesService;
-    }
+    private CategoryService categoryService;
 
     public void setMongoTemplate(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
@@ -37,10 +36,10 @@ public class HomePageCtrl {
     }
 
     @RequestMapping("addBrand")
-    public String addBrand(Categories brand, Model model) {
+    public String addBrand(Category brand, Model model) {
         if(brand != null && brand.getOrder() > 0)
             mongoTemplate.insert(brand);
-        model.addAttribute("brand", new Categories());
+        model.addAttribute("brand", new Category());
         return "thymeleafe/addBrand";
     }
 
@@ -51,7 +50,7 @@ public class HomePageCtrl {
      */
     @RequestMapping("index/brand")
     public String indexBrand(Model model) {
-        model.addAttribute("brands", categoriesService.getHomeCategories(12));
+        model.addAttribute("brands", categoryService.getHomePageCategory(12));
         return "thymeleafe/home/brand";
     }
 

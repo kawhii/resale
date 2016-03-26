@@ -22,10 +22,10 @@
     <!-- Enables the Spring MVC @Controller programming model -->
     <mvc:annotation-driven/>
 
+    <mvc:resources mapping="/js/~/**" location="${resource.module.javascript}"/>
     <mvc:resources mapping="/js/**" location="${resource.javascript}"/>
-    <mvc:resources mapping="/~js/**" location="${resource.module.javascript}"/>
+    <mvc:resources mapping="/styles/~/**" location="${resource.module.css}"/>
     <mvc:resources mapping="/styles/**" location="${resource.css}"/>
-    <mvc:resources mapping="/~styles/**" location="${resource.module.css}"/>
     <mvc:resources mapping="/images/**" location="${resource.images}"/>
 
     <!-- 启用spring mvc 注解 -->

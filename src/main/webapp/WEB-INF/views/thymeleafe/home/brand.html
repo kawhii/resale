@@ -1,7 +1,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{styles/common/jquery.uls.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{styles/common/font-awesome.min.css}"/>
 <!--首页品牌-->
 <div th:each="brand : ${brands}" class="col-md-2 focus-grid">
-    <a href="#">
+    <a th:href="${brand.id}">
         <div class="focus-border">
             <div class="focus-layout">
                 <div class="focus-image"><i th:class="'fa fa-' + ${brand.cssName}"></i></div>
