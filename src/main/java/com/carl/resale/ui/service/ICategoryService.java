@@ -17,4 +17,11 @@ public interface ICategoryService {
      * @return
      */
     public List<Category> getHomeCategory(int limit);
+
+    /**
+     * 获取搜索标签栏
+     * @param limit
+     * @return
+     */
+    public List<Category> findOnSearchDetail(int limit);
 }

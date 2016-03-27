@@ -9,7 +9,7 @@
 <div class="header">
     <div class="container">
         <div class="logo">
-            <a href="index.jsp"><span>转</span>让</a>
+            <a href=""><span>转</span>让</a>
         </div>
         <div class="header-right">
             <a class="account" href="login.html">我的嘟嘟</a>

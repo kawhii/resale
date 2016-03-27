@@ -46,6 +46,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>-->
 
+    <!--thymeleaf 模板引擎-->
     <bean id="templateResolver"
           class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
         <property name="prefix" value="${thymeleaf.prefix}"/>
@@ -59,15 +60,31 @@
         <property name="templateResolver" ref="templateResolver"/>
     </bean>
 
+    <!-- Freemarker配置 -->
+    <bean id="freemarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="${freemarker.path}" />
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+                <prop key="default_encoding">UTF-8</prop>
+                <prop key="number_format">0.##########</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="classic_compatible">true</prop>
+                <prop key="template_exception_handler">ignore</prop>
+            </props>
+        </property>
+    </bean>
+
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="viewResolvers">
             <list>
-                 <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
-                     <property name="templateEngine" ref="templateEngine"/>
-                     <property name="characterEncoding" value="${page.encoding}"/>
-                     <property name="order" value="${thymeleaf.order}"/>
-                     <property name="viewNames" value="${thymeleaf.viewNames}"/>
-                 </bean>
+                <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+                    <property name="templateEngine" ref="templateEngine"/>
+                    <property name="characterEncoding" value="${page.encoding}"/>
+                    <property name="order" value="${thymeleaf.order}"/>
+                    <property name="viewNames" value="${thymeleaf.viewNames}"/>
+                </bean>
 
                 <!-- Default viewClass: JSTL view (JSP with html output)-->
                 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -75,6 +92,23 @@
                     <property name="order" value="${jsp.order}"/>
                     <property name="viewNames" value="${jsp.viewNames}"/>
                     <property name="suffix" value="${jsp.suffix}"/>
+                </bean>
+
+                <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+
+                    <property name="viewClass"
+                              value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
+                    <property name="suffix" value="${freemarker.suffix}"/>
+                    <property name="order" value="${freemarker.order}"/>
+                    <property name="viewNames" value="${freemarker.viewNames}"/>
+                    <property name="allowRequestOverride" value="true"/>
+                    <property name="contentType" value="text/html;charset=utf-8"/>
+                    <property name="exposeRequestAttributes" value="true"/>
+                    <property name="exposeSessionAttributes" value="true"/>
+                    <property name="exposeSpringMacroHelpers" value="true"/>
+                    <!--
+                    <property name="prefix" value="${freemarker.prefix}"/>
+                    -->
                 </bean>
             </list>
         </property>

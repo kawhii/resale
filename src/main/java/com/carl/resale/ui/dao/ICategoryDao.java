@@ -1,6 +1,5 @@
 package com.carl.resale.ui.dao;
 
-import com.carl.resale.ui.bean.Categories;
 import com.carl.resale.ui.bean.Category;
 
 import java.util.List;
@@ -17,4 +16,11 @@ public interface ICategoryDao {
      * @return
      */
     public List<Category> getHomePageCategory(int size);
+
+    /**
+     * 查找用于目录点击tab切换
+     * @param size
+     * @return
+     */
+    public List<Category> findOnSearchDetail(int size);
 }

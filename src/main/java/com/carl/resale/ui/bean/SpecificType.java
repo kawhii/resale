@@ -16,6 +16,9 @@ public class SpecificType {
 
     @Field private String code;
 
+    @Field("name")
+    private String name;
+
     @Field("goods_count") private int goodsCount;
     @Field("order") private int order;
 
@@ -51,11 +54,20 @@ public class SpecificType {
         this.order = order;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "SpecificType{" +
                 "id=" + id +
                 ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
                 ", goodsCount=" + goodsCount +
                 ", order=" + order +
                 '}';

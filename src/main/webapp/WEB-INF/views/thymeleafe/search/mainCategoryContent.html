@@ -9,17 +9,22 @@
  版权所有.(c)2008-2016.广州市森锐电子科技有限公司
  -->
 <html xmlns:th="http://www.thymeleaf.org">
+<script type="application/javascript">
+    seajs.use("~/search/mainCategoryContent.js", function(c) {
+        c.init();
+    });
+</script>
 <div class="categories-section main-grid-border">
     <div class="container">
-        <h2 class="head">Main Categories</h2>
-
+        <h2 class="head">主目录</h2>
         <div class="category-list">
             <div id="parentVerticalTab" class="resp-vtabs hor_1" style="display: block; width: 100%; margin: 0px;">
-                <ul class="resp-tabs-list hor_1" style="margin-top: 3px;">
+                <ul class="resp-tabs-list hor_1" style="margin-top: 3px;" th:each="category:${categories}">
                     <li class="resp-tab-item hor_1" aria-controls="hor_1_tab_item-0" role="tab"
-                        style="border-color: rgb(193, 193, 193); background-color: rgb(245, 245, 245);">Mobiles
+                        style="border-color: rgb(193, 193, 193); background-color: rgb(245, 245, 245);"
+                            th:text="${selectId.equals(category.id)}?'1':'2'">
                     </li>
-                    <li class="resp-tab-item hor_1 resp-tab-active" aria-controls="hor_1_tab_item-1" role="tab"
+                    <!--<li class="resp-tab-item hor_1 resp-tab-active" aria-controls="hor_1_tab_item-1" role="tab"
                         style="border-color: rgb(193, 193, 193); background-color: white;">Electronics &amp; Appliances
                     </li>
                     <li class="resp-tab-item hor_1" aria-controls="hor_1_tab_item-2" role="tab"
@@ -53,7 +58,7 @@
                     <li class="resp-tab-item hor_1" aria-controls="hor_1_tab_item-11" role="tab"
                         style="background-color: rgb(245, 245, 245);">Real Estate
                     </li>
-                    <a href="all-classifieds.html">All Ads</a>
+                    <a href="all-classifieds.html">All Ads</a>-->
                 </ul>
                 <div class="resp-tabs-container hor_1" style="border-color: rgb(193, 193, 193);">
                     <span class="active total" style="display:block;" data-toggle="modal"
@@ -399,27 +404,4 @@
         </div>
     </div>
 </div>
-<script type="application/javascript">
-    seajs.use("~/");
-</script>
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        //Vertical Tab
-        $('#parentVerticalTab').easyResponsiveTabs({
-            type: 'vertical', //Types: default, vertical, accordion
-            width: 'auto', //auto or any width like 600px
-            fit: true, // 100% fit in a container
-            closed: 'accordion', // Start closed if in accordion view
-            tabidentify: 'hor_1', // The tab groups identifier
-            activate: function(event) { // Callback function if tab is switched
-                var $tab = $(this);
-                var $info = $('#nested-tabInfo2');
-                var $name = $('span', $info);
-                $name.text($tab.text());
-                $info.show();
-            }
-        });
-    });
-</script>
 </html>

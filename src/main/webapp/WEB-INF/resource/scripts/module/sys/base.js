@@ -11,17 +11,19 @@
  */
 
 seajs.config({
-    base : "./js/",
+    base: "./js/",
     //别名
-    alias :{
-        "jquery" : "lib/jquery/jquery.min.js",
+    alias: {
+        "jquery": "lib/jquery/jquery.min.js",
         "jquery.flexisel": "lib/jquery/jquery.flexisel.js",
         "jquery.leanModal": "lib/jquery/jquery.leanModal.min.js",
-        "sea" : "lib/seajs/sea.js",
-        "bootstrap" : "common/bootstrap.min.js",
-        "bootstrap-select" : "common/bootstrap-select.js"
+        "sea": "lib/seajs/sea.js",
+        "bootstrap": "common/bootstrap.min.js",
+        "bootstrap-select": "common/bootstrap-select.js",
+        //目录查找脚本
+        "easyResponsiveTabs": "common/easyResponsiveTabs.js"
     },
     // 文件编码
-    charset: 'utf-8'
+    charset: "utf-8"
 });
 

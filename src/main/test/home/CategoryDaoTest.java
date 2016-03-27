@@ -23,6 +23,11 @@ public class CategoryDaoTest extends BaseTest {
 
     @Test
     public void testHomeService() {
-        System.out.println(categoryService.getHomePageCategory(1));
+        System.out.println(categoryService.getHomeCategory(1));
+    }
+
+    @Test
+    public void testSearch() {
+        System.out.println(categoryService.findOnSearchDetail(12));
     }
 }

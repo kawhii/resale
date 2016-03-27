@@ -8,13 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="keywords" content="Resale Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design"/>
-    <jsp:include page="base.jsp"></jsp:include>
-    <link rel="stylesheet" href="styles/common/bootstrap.min.css"/>
-    <link href="styles/common/style.css" rel="stylesheet" type="text/css" media="all"/>
-
-    <script type="application/javascript">
+    <jsp:include page="/base"></jsp:include>
+    <%--<script type="application/javascript">
         seajs.use("~/home/index.js");
-    </script>
+    </script>--%>
+    <script type="application/javascript" src="js/lib/jquery/jquery.flexisel.js"></script>
+    <script type="application/javascript" src="js/lib/jquery/jquery.leanModal.min.js"></script>
+    <script type="application/javascript" src="js/common/bootstrap.min.js"></script>
+    <script type="application/javascript" src="js/common/bootstrap-select.js"></script>
     <script type="application/x-javascript">
         addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
@@ -211,6 +212,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
+<script type="application/javascript" src="js/~/home/index.js"></script>
 <jsp:include page="/index/footer"></jsp:include>
 </body>
 </html>
