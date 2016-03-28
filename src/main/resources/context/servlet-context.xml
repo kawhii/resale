@@ -86,6 +86,7 @@
     </bean>
 
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="useNotAcceptableStatusCode" value="true"/>
         <property name="viewResolvers">
             <list>
                 <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">

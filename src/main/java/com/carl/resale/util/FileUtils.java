@@ -33,8 +33,8 @@ public class FileUtils {
         String webRootPath = Constants.getWebRoot();
         String uploadFilePath = FrameworkConfig.getInstance().getParam("", "upload-files");
         String name = file.getOriginalFilename();
-        String type = "." + getFileExt(name);
-        String fileName = UUID.get() + type;
+        String type = getFileExt(name);
+        String fileName = UUID.get() + "." + type;
         String path = uploadFilePath + File.separator + adapter.path() + File.separator + fileName;
         path = path.replace('\\', '/');
         File targetFile = new File(webRootPath + path);
@@ -52,6 +52,15 @@ public class FileUtils {
         returnFile.setType(type);
         returnFile.setCreateTime(new Date());
         return returnFile;
+    }
+
+    /**
+     * 利用系统文件转换成真实文件
+     * @param file
+     * @return
+     */
+    public static File convertSysFileToFile(SysFile file) {
+        return new File(Constants.getWebRoot() + file.getPath());
     }
 
     /**

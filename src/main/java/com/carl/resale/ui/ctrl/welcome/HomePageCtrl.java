@@ -1,10 +1,8 @@
 package com.carl.resale.ui.ctrl.welcome;
 
-import com.carl.resale.ui.bean.Category;
 import com.carl.resale.ui.ctrl.BaseCtrl;
 import com.carl.resale.ui.service.impl.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,14 +25,6 @@ public class HomePageCtrl extends BaseCtrl {
     @RequestMapping("")
     public String index() {
         return "jsp/index";
-    }
-
-    @RequestMapping("addBrand")
-    public String addBrand(Category brand, Model model) {
-        if (brand != null && brand.getOrder() > 0)
-            mongoTemplate.insert(brand);
-        model.addAttribute("brand", new Category());
-        return THYMELEAFE + SEPARATOR + "addBrand";
     }
 
     /**

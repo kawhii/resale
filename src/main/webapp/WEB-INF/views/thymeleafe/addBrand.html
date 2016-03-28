@@ -5,7 +5,7 @@
     <title>添加品牌</title>
 </head>
 <body>
-<form method="post" th:object="${brand}">
+<form th:object="${brand}" method="post" enctype="multipart/form-data" th:action="@{/data/addBrand}">
     <table>
         <tr>
             <td>品牌名称</td>
@@ -29,6 +29,12 @@
             <td>品牌样式</td>
             <td>
                 <input type="text" th:field="*{cssName}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>展示图片</td>
+            <td>
+                <input type="file" name="file"/>
             </td>
         </tr>
         <tr>

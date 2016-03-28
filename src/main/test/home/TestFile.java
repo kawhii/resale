@@ -25,7 +25,7 @@ public class TestFile extends BaseTest {
         file.setName("a.jpg");
         file.setBusiness("test");
         file.setType("type");
-        file.setPath("type/a.jpg");
+        file.setPath("upload-files/tyle/88602E497D404CBB96E9E5FB81CB89C5.jpg");
         file.setSize(100L);
         file.setStatus(0);
         file.setCreateTime(new Date());

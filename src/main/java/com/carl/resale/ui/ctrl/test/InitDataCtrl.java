@@ -31,6 +31,11 @@ public class InitDataCtrl extends BaseCtrl {
         return "init-data";
     }
 
+    /**
+     * 转发上传文件
+     * @param model
+     * @return
+     */
     @RequestMapping("/goUploadFile")
     public String goUploadFile(Model model) {
         SysFile f = new SysFile();
@@ -39,6 +44,13 @@ public class InitDataCtrl extends BaseCtrl {
         return JSP + getWarpModuleName() + "uploadFile";
     }
 
+    /**
+     * 单一上传文件
+     * @param file
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/uploadFile")
     public String uploadFile(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) throws Exception {
         logger.info(file.getOriginalFilename());
@@ -51,5 +63,45 @@ public class InitDataCtrl extends BaseCtrl {
             }
         });
         return null;
+    }
+
+
+    /**
+     * 添加品牌上次文件
+     * @param brand
+     * @param file
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("addBrand")
+    public String addBrand(Category brand, @RequestParam(value = "file", required = false) MultipartFile file, Model model) throws Exception {
+        if (brand != null && brand.getOrder() > 0) {
+            final String businessType = "test";
+            SysFile sysFile = FileUtils.save(file, new FilePathAdapter() {
+                @Override
+                public String path() {
+                    return businessType;
+                }
+            });
+            sysFile.setBusiType(businessType);
+            fileRepository.insert(sysFile);
+            brand.setImageId(sysFile.getId());
+            brand.setImageType(sysFile.getType());
+            mongoTemplate.insert(brand);
+        }
+        model.addAttribute("brand", new Category());
+        return THYMELEAFE + SEPARATOR + "addBrand";
+    }
+
+    /**
+     * 目录上次图片
+     * @param model
+     * @return
+     */
+    @RequestMapping("goAddBrand")
+    public String goToAddBrand(Model model) {
+        model.addAttribute("brand", new Category());
+        return THYMELEAFE + SEPARATOR + "addBrand";
     }
 }

@@ -23,6 +23,7 @@ public class Category {
     @Field("state") private State state;
     @Field("goods_count") private int goodsCount;//广告总数
     @Field("image_id")private ObjectId imageId;
+    @Field("image_type")private String imageType;
     @Field("spec_types") private List<SpecificType> specTypes;
     @Field("business_id") private String business;
 
@@ -102,6 +103,14 @@ public class Category {
         return business;
     }
 
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
+
     public void setBusiness(String business) {
         this.business = business;
     }
@@ -112,6 +121,7 @@ public class Category {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", code='" + code + '\'' +
+                ", imageType='" + imageType + '\'' +
                 ", order=" + order +
                 ", cssName='" + cssName + '\'' +
                 ", state=" + state +
