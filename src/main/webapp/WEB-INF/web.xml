@@ -5,6 +5,16 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
     http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+    <!-- 此Filter必需排在第一位 -->
+    <filter>
+        <filter-name>CoreFilter</filter-name>
+        <filter-class>com.carl.resale.core.CoreFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CoreFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!-- spring配置 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>

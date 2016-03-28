@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+框架一般的配置
+-->
+<config>
+    <!--文件上传的路径，如果以 / 开头表示使用的是绝对路径（windows下会自动去掉第一个/），相对路径（基于WebRoot）不使用 /  开头-->
+    <param name="upload-path">upload-files</param>
+</config>
