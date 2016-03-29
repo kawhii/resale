@@ -21,7 +21,7 @@ import java.util.List;
  * @modify 版权所有.(c)2008-2016.广州市森锐电子科技有限公司
  */
 @Controller
-@RequestMapping("cf")
+@RequestMapping("/cf")
 public class ClassifiedsCtrl extends BaseCtrl {
     @Autowired
     private AreaService areaService;
@@ -29,16 +29,26 @@ public class ClassifiedsCtrl extends BaseCtrl {
     @Autowired
     private ICategoryService categoryService;
 
-    @RequestMapping("search")
-    public void search(@RequestParam(required = false)String cityId, @RequestParam(required = false) String categoryId, Model model) {
+    @RequestMapping("/search")
+    public String search(@RequestParam(required = false)String cityId, @RequestParam(required = false) String categoryId, Model model) {
         //获取当前地区
         List<SysArea> area = areaService.findAllHighest();
         //如果全部，才进行获取
-        List<Category> category = categoryService.findOnSearchDetail(50);
+        List<Category> category = categoryService.getHomeCategory(50);
+        model.addAttribute("cityId", cityId);
+        model.addAttribute("categoryId", categoryId);
+        model.addAttribute("listArea", area);
+        model.addAttribute("listCategory", category);
+        return JSP + getWarpModuleName() + "classifieds";
+    }
+
+    @RequestMapping("/body")
+    public String body(Model model) {
+        return FREEMARKER + getWarpModuleName() + "classifiedsBody";
     }
 
     @Override
     protected String getModuleName() {
-        return "classifieds";
+        return "search";
     }
 }
