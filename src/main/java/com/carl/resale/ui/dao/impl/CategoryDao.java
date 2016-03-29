@@ -26,7 +26,7 @@ public class CategoryDao extends BaseDao implements ICategoryDao {
     @Override
     public List<Category> findOnSearchDetail(int size) {
         Query q = new Query();
-        q.fields().include("id").include("name").include("imageId").include("specTypes").include("goodsCount");
+        q.fields().include("id").include("name").include("imageId").include("specTypes").include("goodsCount").include("imageType");
         return getMongoTemplate().find(q.with(new Sort(Sort.Direction.ASC, "order")).limit(size), Category.class);
     }
 }

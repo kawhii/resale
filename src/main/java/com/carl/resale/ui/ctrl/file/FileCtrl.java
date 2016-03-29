@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * 常量类
@@ -49,7 +53,9 @@ public class FileCtrl extends BaseCtrl {
         OutputStream os = res.getOutputStream();
         try {
             res.reset();
-            res.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+            //下载时需要
+//            res.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+            res.setHeader("Last-Modified", formatModifyDate(com.carl.resale.util.FileUtils.fileLastModifyDate(file)));
             res.setCharacterEncoding("UTF-8");
 //            res.setContentType("application/octet-stream; charset=utf-8");
             os.write(FileUtils.readFileToByteArray(file));
@@ -64,5 +70,16 @@ public class FileCtrl extends BaseCtrl {
     @Override
     protected String getModuleName() {
         return "file";
+    }
+
+    /**
+     * 获取文件最后修改时间
+     * @param date
+     * @return
+     */
+    private String formatModifyDate(Date date) {
+        Format simpleFormat = new SimpleDateFormat("E, dd MMM yyyy hh:mm:ss", Locale.ENGLISH);
+        String dateString = simpleFormat.format(date);
+        return dateString + " GMT";
     }
 }

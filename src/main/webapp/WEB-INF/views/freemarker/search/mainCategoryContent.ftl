@@ -13,6 +13,7 @@
         c.init();
     });
 </script>-->
+<#--<script type="application/javascript" src="js/lib/jquery-lazyload/jquery.lazyload.min.js"></script>-->
 <script type="application/javascript" src="js/common/easyResponsiveTabs.js"></script>
 <div class="categories-section main-grid-border">
     <div class="container">
@@ -47,7 +48,9 @@
                     <div class="resp-tab-content hor_1" aria-labelledby="hor_1_tab_item-${st_index}">
                         <div class="category">
                             <div class="category-img">
-                                <img src="images/cat1.png" title="image" alt=""></img>
+                                <#if c.imageId??>
+                                    <img class="lazy" src="file/img/${c.imageId}.${c.imageType}" title="${c.name}" alt=""></img>
+                                </#if>
                             </div>
                             <div class="category-info">
                                 <h4>${c.name}</h4>

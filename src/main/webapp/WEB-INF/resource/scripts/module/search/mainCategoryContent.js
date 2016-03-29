@@ -60,6 +60,8 @@
     }
 
     function init() {
+        //允许延迟加载
+        //$("img.lazy").lazyload({ effect : "fadeIn",event : "click" });
         tabChangeInit();
     }
 

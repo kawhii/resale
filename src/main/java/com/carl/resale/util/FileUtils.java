@@ -9,7 +9,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 
 /**
@@ -35,13 +38,15 @@ public class FileUtils {
         String name = file.getOriginalFilename();
         String type = getFileExt(name);
         String fileName = UUID.get() + "." + type;
-        String path = uploadFilePath + File.separator + adapter.path() + File.separator + fileName;
+        String path = uploadFilePath + File.separator + adapter.path() + File.separator;
         path = path.replace('\\', '/');
         File targetFile = new File(webRootPath + path);
         if (!targetFile.exists()) {
             log.debug("路径不存在，准备创建目录[" + webRootPath + path + "]");
             targetFile.mkdirs();
         }
+        path += fileName;
+        targetFile = new File(webRootPath + path);
         file.transferTo(targetFile);
         log.debug("文件保存成功：[" + (webRootPath + path));
 
@@ -61,6 +66,17 @@ public class FileUtils {
      */
     public static File convertSysFileToFile(SysFile file) {
         return new File(Constants.getWebRoot() + file.getPath());
+    }
+
+    /**
+     * 获取文件的最后修改时间
+     * @param file
+     * @return
+     */
+    public static Date fileLastModifyDate(File file) {
+        long time = file.lastModified();
+        Date d = new Date(time);
+        return d;
     }
 
     /**
@@ -90,5 +106,9 @@ public class FileUtils {
             ext = name.substring(name.lastIndexOf(".") + 1).toLowerCase();
         }
         return ext;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(fileLastModifyDate(new File("D:\\carl\\work\\sunrise\\workspace\\idea\\study\\resale\\target\\resale\\upload-files\\test\\86B634F7FC8546F999D74363F8C63EE9.jpg")));
     }
 }
