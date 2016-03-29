@@ -19,7 +19,7 @@ public class CategoryDao extends BaseDao implements ICategoryDao {
     @Override
     public List<Category> getHomePageCategory(int size) {
         Query q = new Query();
-        q.fields().include("id").include("name").include("cssName");
+        q.fields().include("id").include("name").include("cssName").include("goodsCount");
         return getMongoTemplate().find(q.with(new Sort(Sort.Direction.ASC, "order")).limit(size), Category.class);
     }
 

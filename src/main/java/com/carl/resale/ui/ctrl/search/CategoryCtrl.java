@@ -5,8 +5,8 @@ import com.carl.resale.ui.service.impl.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 /**
@@ -22,8 +22,8 @@ public class CategoryCtrl extends BaseCtrl {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("/{id}")
-    public String mainCategories(@PathVariable String id, Model model) {
+    @RequestMapping("/")
+    public String mainCategories(@RequestParam(required = false) String id, Model model) {
         //当前选择的目录id
         model.addAttribute("id", id);
         model.addAttribute("categories", categoryService.findOnSearchDetail(12));

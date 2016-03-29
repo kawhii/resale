@@ -206,7 +206,7 @@
                                 newHash = '#' + newHash;
                             }
 
-                            history.replaceState(null, null, newHash);
+                            history.replaceState(null, null, location.origin + location.pathname + location.search + newHash);
                         }
                     });
 

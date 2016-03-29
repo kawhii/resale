@@ -1,6 +1,5 @@
 package com.carl.resale.ui.service;
 
-import com.carl.resale.ui.bean.Categories;
 import com.carl.resale.ui.bean.Category;
 
 import java.util.List;
