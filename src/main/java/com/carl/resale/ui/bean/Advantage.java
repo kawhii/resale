@@ -5,11 +5,17 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * 广告类
+ *
  * @author Carl
  * @date 2016/3/30
  * @modify 版权所有.(c)2008-2016.广州市森锐电子科技有限公司
@@ -44,6 +50,19 @@ public class Advantage {
     @DBRef
     private SysUser publishUser;
     private String condition;
+
+    /**
+     * 获取现在离发布时间天数
+     *
+     * @return
+     */
+    public long getPublishTimeType() throws ParseException {
+        SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String rightNow = df.format(new Date());
+        String pt = df.format(this.getPublishTime());
+        long between = (df.parse(rightNow).getTime() - df.parse(pt).getTime()) / 1000;//除以1000是为了转换成秒
+        return between/(24*3600);
+    }
 
     public ObjectId getId() {
         return id;

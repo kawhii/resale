@@ -7,11 +7,20 @@ package com.carl.resale.ui.bean;
  * @modify 版权所有.(c)2008-2016.广州市森锐电子科技有限公司
  */
 public class ClassifiedsSearchParam {
+    /**
+     * 默认第一页
+     */
+    public static final int DEFAULT_PAGE = 1;
+    /**
+     * 默认24个一页
+     */
+    public static final int DEFAULT_PAGE_SIZE = 24;
     private String cityId;
     private String categoryId;
-    private int pageSize = 24;
-    private int page;
+    private int pageSize = DEFAULT_PAGE_SIZE;
+    private int page = DEFAULT_PAGE;
     private String order;
+    private String specificTypeId;
 
     public String getCityId() {
         return cityId;
@@ -53,6 +62,14 @@ public class ClassifiedsSearchParam {
         this.order = order;
     }
 
+    public String getSpecificTypeId() {
+        return specificTypeId;
+    }
+
+    public void setSpecificTypeId(String specificTypeId) {
+        this.specificTypeId = specificTypeId;
+    }
+
     @Override
     public String toString() {
         return "ClassifiedsSearchParam{" +
@@ -60,6 +77,7 @@ public class ClassifiedsSearchParam {
                 ", categoryId='" + categoryId + '\'' +
                 ", pageSize=" + pageSize +
                 ", page=" + page +
+                ", specificTypeId=" + specificTypeId +
                 ", order='" + order + '\'' +
                 '}';
     }
