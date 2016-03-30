@@ -1,8 +1,11 @@
 package com.carl.resale.ui.bean;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.List;
 
 /**
  * @author Carl
@@ -21,6 +24,18 @@ public class SpecificType {
 
     @Field("goods_count") private int goodsCount;
     @Field("order") private int order;
+
+    @Field
+    @DBRef
+    private List<Brand> brands;
+
+    public List<Brand> getBrands() {
+        return brands;
+    }
+
+    public void setBrands(List<Brand> brands) {
+        this.brands = brands;
+    }
 
     public ObjectId getId() {
         return id;

@@ -10,8 +10,8 @@
 <div class="all-categories">
     <h3> Select your category and find the perfect ad</h3>
     <ul class="all-cat-list">
-    <#list listCategory as category>
-        <li><a href="mobiles.html">${category.name} <span class="num-of-ads">(${category.goodsCount})</span></a></li>
+    <#list result.listCategory as category>
+        <li><a href="cf/search?categoryId=${category.id}">${category.name} <span class="num-of-ads">(${category.goodsCount})</span></a></li>
     </#list>
     </ul>
 </div>

@@ -3,10 +3,12 @@ package com.carl.resale.ui.service.impl;
 import com.carl.resale.ui.bean.Category;
 import com.carl.resale.ui.dao.ICategoryDao;
 import com.carl.resale.ui.service.ICategoryService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 /**
  * @author Carl
@@ -27,5 +29,10 @@ public class CategoryService implements ICategoryService {
     @Override
     public List<Category> findOnSearchDetail(int limit) {
         return categoryDao.findOnSearchDetail(limit);
+    }
+
+    @Override
+    public Category findById(String id) {
+        return categoryDao.findById(new ObjectId(id));
     }
 }

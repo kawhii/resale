@@ -10,23 +10,26 @@
 <div class="side-bar col-md-3">
     <div class="search-hotel">
         <h3 class="sear-head">Name contains</h3>
+
         <form>
-            <input type="text" value="Product name..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Product name...';}" required="">
+            <input type="text" value="Product name..." onfocus="this.value = '';"
+                   onblur="if (this.value == '') {this.value = 'Product name...';}" required="">
             <input type="submit" value=" ">
         </form>
     </div>
 
-    <div class="range">
+    <#--<div class="range">
         <h3 class="sear-head">Price range</h3>
         <ul class="dropdown-menu6">
             <li>
 
-                <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header" style="left: 0.5555555555555556%; width: 66.1111111111111%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.5555555555555556%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 66.66666666666666%;"></a></div>
+                <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header" style="left: 0.555556%; width: 66.1111%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.555556%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 66.6667%;"></a></div>
                 <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;">
             </li>
         </ul>
-        <!---->
-
+        <!--&ndash;&gt;
+        <script type="text/javascript" src="js/lib/jquery/jquery-ui.js"></script>
+        <link rel="stylesheet" href="styles/common/jquery-ui1.css"/>
         <script type="text/javascript">//<![CDATA[
         $(window).load(function(){
             $( "#slider-range" ).slider({
@@ -43,9 +46,25 @@
 
         </script>
 
+    </div>-->
+<#if result.categoryDetail?? && result.categoryDetail.specTypes>
+    <div class="brand-select">
+        <h3 class="sear-head">Brand name</h3>
+
+        <div class="btn-group bootstrap-select">
+            <select class="selectpicker" data-live-search="true" tabindex="-98">
+                <option data-tokens="All">All</option>
+                <#list result.categoryDetail.specTypes as st>
+                    <option data-tokens="${st.id}">${st.name}</option>
+                </#list>
+            </select>
+        </div>
     </div>
+</#if>
+
     <div class="featured-ads">
         <h2 class="sear-head fer">Featured Ads</h2>
+
         <div class="featured-ad">
             <a href="single.html">
                 <div class="featured-ad-left">
@@ -53,6 +72,7 @@
                 </div>
                 <div class="featured-ad-right">
                     <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
+
                     <p>$ 450</p>
                 </div>
                 <div class="clearfix"></div>
@@ -65,6 +85,7 @@
                 </div>
                 <div class="featured-ad-right">
                     <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
+
                     <p>$ 380</p>
                 </div>
                 <div class="clearfix"></div>
@@ -77,6 +98,7 @@
                 </div>
                 <div class="featured-ad-right">
                     <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
+
                     <p>$ 560</p>
                 </div>
                 <div class="clearfix"></div>

@@ -30,7 +30,7 @@
                     ${category.name}
                     </li>
                     <#if !category_has_next>
-                        <a href="">全部</a>
+                        <a href="cf/search">全部</a>
                     </#if>
                 </#list>
                 </ul>
@@ -55,7 +55,7 @@
                             <div class="category-info">
                                 <h4>${c.name}</h4>
                                 <span>${c.goodsCount}条</span>
-                                <a href="all-classifieds.html">View all Ads</a>
+                                <a href="cf/search?categoryId=${c.id}">查看全部</a>
                             </div>
                             <div class="clearfix"></div>
                         </div>

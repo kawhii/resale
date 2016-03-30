@@ -1,9 +1,13 @@
 package com.carl.resale.ui.ctrl.test;
 
 import com.carl.resale.core.file.FilePathAdapter;
+import com.carl.resale.ui.bean.Advantage;
 import com.carl.resale.ui.bean.Category;
+import com.carl.resale.ui.bean.SysArea;
 import com.carl.resale.ui.bean.SysFile;
 import com.carl.resale.ui.ctrl.BaseCtrl;
+import com.carl.resale.ui.repositories.AdvantageRepository;
+import com.carl.resale.ui.repositories.SysAreaRepository;
 import com.carl.resale.ui.repositories.SysFileRepository;
 import com.carl.resale.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Carl
@@ -25,6 +31,12 @@ import javax.servlet.http.HttpServletRequest;
 public class InitDataCtrl extends BaseCtrl {
     @Autowired
     private SysFileRepository fileRepository;
+
+    @Autowired
+    private SysAreaRepository sysAreaRepository;
+
+    @Autowired
+    private AdvantageRepository advRepository;
 
     @Override
     protected String getModuleName() {
@@ -42,6 +54,19 @@ public class InitDataCtrl extends BaseCtrl {
         f.setName("a.jpg");
         model.addAttribute("file", f);
         return JSP + getWarpModuleName() + "uploadFile";
+    }
+
+    /**
+     * 转发上传文件
+     * @param model
+     * @return
+     */
+    @RequestMapping("")
+    public String goInit(Model model) {
+        SysFile f = new SysFile();
+        f.setName("a.jpg");
+        model.addAttribute("file", f);
+        return THYMELEAFE + getWarpModuleName() + "nav";
     }
 
     /**
@@ -92,6 +117,43 @@ public class InitDataCtrl extends BaseCtrl {
         }
         model.addAttribute("brand", new Category());
         return THYMELEAFE + SEPARATOR + "addBrand";
+    }
+
+    /**
+     * 广告发布
+     * @return
+     */
+    @RequestMapping("publishAdvantage")
+    public String publishAdvantage(Advantage advantage, @RequestParam(value = "file", required = false) MultipartFile file, Model model)
+            throws Exception {
+        final String business = advantage.getBusiness();
+        SysArea area = sysAreaRepository.findAll().get(0);
+        advantage.setArea(area);
+        SysFile sysFile = FileUtils.save(file, new FilePathAdapter() {
+            @Override
+            public String path() {
+                return business;
+            }
+        });
+        fileRepository.insert(sysFile);
+        advantage.setPreviewImage(sysFile);
+        List<SysFile> files = new ArrayList<SysFile>();
+        files.add(sysFile);
+        files.add(sysFile);
+        advantage.setDisplayImgs(files);
+        advRepository.insert(advantage);
+        return THYMELEAFE + getWarpModuleName() + "publishAdvantage";
+    }
+
+    /**
+     * 目录上次图片
+     * @param model
+     * @return
+     */
+    @RequestMapping("goPublishAdvantage")
+    public String goPublishAdvantage(Model model) {
+        model.addAttribute("advantage", new Advantage());
+        return THYMELEAFE + getWarpModuleName() + "publishAdvantage";
     }
 
     /**

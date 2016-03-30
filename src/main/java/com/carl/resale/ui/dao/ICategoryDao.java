@@ -1,6 +1,7 @@
 package com.carl.resale.ui.dao;
 
 import com.carl.resale.ui.bean.Category;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -23,4 +24,11 @@ public interface ICategoryDao {
      * @return
      */
     public List<Category> findOnSearchDetail(int size);
+
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    public Category findById(ObjectId id);
 }

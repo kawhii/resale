@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+    <title>添加广告</title>
+</head>
+<body>
+<form th:object="${advantage}" method="post" enctype="multipart/form-data" th:action="@{/data/publishAdvantage}">
+    <table>
+        <tr>
+            <td>业务编码</td>
+            <td>
+                <input type="text" th:field="*{business}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>标题</td>
+            <td>
+                <input type="text" th:field="*{title}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>广告描述</td>
+            <td>
+                <input type="text" th:field="*{describe}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>查看次数</td>
+            <td>
+                <input type="number" th:field="*{views}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>总结</td>
+            <td>
+                <input type="text" th:field="*{summary}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>价钱</td>
+            <td>
+                <input type="number" th:field="*{price}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>展示图片</td>
+            <td>
+                <input type="file" name="file"/>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" id="button_submit" value="提交"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

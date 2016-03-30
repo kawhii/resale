@@ -7,6 +7,31 @@
  @modify
  版权所有.(c)2008-2016.广州市森锐电子科技有限公司
  -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var elem=$('#container ul');
+        $('#viewcontrols a').on('click',function(e) {
+            if ($(this).hasClass('gridview')) {
+                elem.fadeOut(1000, function () {
+                    $('#container ul').removeClass('list').addClass('grid');
+                    $('#viewcontrols').removeClass('view-controls-list').addClass('view-controls-grid');
+                    $('#viewcontrols .gridview').addClass('active');
+                    $('#viewcontrols .listview').removeClass('active');
+                    elem.fadeIn(1000);
+                });
+            }
+            else if($(this).hasClass('listview')) {
+                elem.fadeOut(1000, function () {
+                    $('#container ul').removeClass('grid').addClass('list');
+                    $('#viewcontrols').removeClass('view-controls-grid').addClass('view-controls-list');
+                    $('#viewcontrols .gridview').removeClass('active');
+                    $('#viewcontrols .listview').addClass('active');
+                    elem.fadeIn(1000);
+                });
+            }
+        });
+    });
+</script>
 <div class="ads-display col-md-9">
     <div class="wrapper">
         <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">

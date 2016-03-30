@@ -31,10 +31,10 @@
     <div class="select-city-for-local-ads ads-list">
         <label>Select your city to see local ads</label>
         <select>
-        <#list listArea as city>
+        <#list result.listArea as city>
             <optgroup label="${city.name}">
                 <#list city.children as c>
-                    <option <#if c.id == cityId>selected</#if> value="${c.id}">${c.name}</option>
+                    <option <#if c.id == result.cityId>selected</#if> value="${c.id}">${c.name}</option>
                 </#list>
             </optgroup>
         </#list>
@@ -47,8 +47,8 @@
 
             <select class="selectpicker show-tick" data-live-search="true" tabindex="-98">
                 <option data-tokens="Mobiles">All</option>
-            <#list listCategory as category>
-                <option <#if c.id == categoryId>selected</#if> data-tokens="${category.id}">${category.name}</option>
+            <#list result.listCategory as category>
+                <option <#if category.id == result.categoryId>selected</#if> data-tokens="${category.id}">${category.name}</option>
             </#list>
             </select></div>
     </div>

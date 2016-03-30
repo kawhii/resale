@@ -27,6 +27,8 @@
     <mvc:resources mapping="/styles/~/**" location="${resource.module.css}"/>
     <mvc:resources mapping="/styles/**" location="${resource.css}"/>
     <mvc:resources mapping="/images/**" location="${resource.images}"/>
+    <!--图片文件-->
+    <mvc:resources mapping="/file/img/~/**" location="/"/>
 
     <!-- 启用spring mvc 注解 -->
     <context:annotation-config/>

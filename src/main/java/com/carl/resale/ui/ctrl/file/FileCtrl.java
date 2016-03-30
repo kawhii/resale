@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
@@ -33,18 +35,25 @@ public class FileCtrl extends BaseCtrl {
 
     @RequestMapping("img/{id}.{type}")
     @ResponseBody
-    public void getImage(@PathVariable String id, @PathVariable String type, HttpServletResponse res) {
-        File file = fileService.getFileByIdAndType(id, type);
-        res.setContentType("image/" + type);
+    public void getImage(@PathVariable String id, @PathVariable String type, HttpServletRequest request, HttpServletResponse res) {
         try {
-            write(res, file);
-        } catch (IOException e) {
+           /* File file = fileService.getFileByIdAndType(id, type);
+            res.setContentType("image/" + type);
+            //写出去还是，转发过去
+            write(res, file);*/
+
+            //直接转发回去
+            String filePath = fileService.getFilePathByIdAndType(id, type);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("~/" + filePath);
+            dispatcher.forward(request, res);
+        } catch (Exception e) {
             logger.error(e);
         }
     }
 
     /**
      * 写出文件
+     *
      * @param res
      * @param file
      * @throws IOException
@@ -74,6 +83,7 @@ public class FileCtrl extends BaseCtrl {
 
     /**
      * 获取文件最后修改时间
+     *
      * @param date
      * @return
      */

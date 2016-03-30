@@ -25,4 +25,10 @@ public class FileService implements IFileService {
         SysFile file = fileRepository.findByIdAndType(new ObjectId(id), type);
         return FileUtils.convertSysFileToFile(file);
     }
+
+    @Override
+    public String getFilePathByIdAndType(String id, String type) {
+        SysFile file = fileRepository.findByIdAndType(new ObjectId(id), type);
+        return file.getPath();
+    }
 }

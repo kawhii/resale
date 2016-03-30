@@ -1,6 +1,7 @@
 package com.carl.resale.ui.service;
 
 import com.carl.resale.ui.bean.Category;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -23,4 +24,11 @@ public interface ICategoryService {
      * @return
      */
     public List<Category> findOnSearchDetail(int limit);
+
+    /**
+     * 根据id唯一查询
+     * @param id
+     * @return
+     */
+    public Category findById(String id);
 }

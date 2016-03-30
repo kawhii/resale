@@ -18,4 +18,12 @@ public interface IFileService {
      * @return
      */
     public File getFileByIdAndType(String id, String type);
+
+    /**
+     * 获取文件路径
+     * @param id
+     * @param type
+     * @return
+     */
+    public String getFilePathByIdAndType(String id, String type);
 }
