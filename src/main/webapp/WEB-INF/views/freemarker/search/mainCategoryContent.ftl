@@ -63,7 +63,7 @@
                             <ul>
                                 <#if c.specTypes?exists>
                                     <#list c.specTypes as st>
-                                        <li><a href="#">${st.name}</a></li>
+                                        <li><a href="cf/search?categoryId=${c.id}&specificTypeId=${st.id}">${st.name}</a></li>
                                     </#list>
                                     <div class="clearfix"></div>
                                 </#if>

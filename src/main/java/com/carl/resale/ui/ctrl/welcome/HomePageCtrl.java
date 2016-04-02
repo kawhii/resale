@@ -1,6 +1,7 @@
 package com.carl.resale.ui.ctrl.welcome;
 
 import com.carl.resale.ui.ctrl.BaseCtrl;
+import com.carl.resale.ui.repositories.HotAdvantageRepository;
 import com.carl.resale.ui.service.impl.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class HomePageCtrl extends BaseCtrl {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private HotAdvantageRepository hotAdvantageRepository;
+
 
     @RequestMapping("")
     public String index() {
@@ -37,6 +41,17 @@ public class HomePageCtrl extends BaseCtrl {
     public String indexBrand(Model model) {
         model.addAttribute("brands", categoryService.getHomeCategory(12));
         return FREEMARKER + getWarpModuleName() + "brand";
+    }
+
+    /**
+     * 热门广告
+     * @param model
+     * @return
+     */
+    @RequestMapping("index/hotAdv")
+    public String hotAdv(Model model) {
+        model.addAttribute("hotAdv", hotAdvantageRepository.getHomePageHotAdv());
+        return FREEMARKER + getWarpModuleName() + "hotAdv";
     }
 
     /**

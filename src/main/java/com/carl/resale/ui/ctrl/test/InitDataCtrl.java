@@ -1,15 +1,9 @@
 package com.carl.resale.ui.ctrl.test;
 
 import com.carl.resale.core.file.FilePathAdapter;
-import com.carl.resale.ui.bean.Advantage;
-import com.carl.resale.ui.bean.Category;
-import com.carl.resale.ui.bean.SysArea;
-import com.carl.resale.ui.bean.SysFile;
+import com.carl.resale.ui.bean.*;
 import com.carl.resale.ui.ctrl.BaseCtrl;
-import com.carl.resale.ui.repositories.AdvantageRepository;
-import com.carl.resale.ui.repositories.CategoryRepository;
-import com.carl.resale.ui.repositories.SysAreaRepository;
-import com.carl.resale.ui.repositories.SysFileRepository;
+import com.carl.resale.ui.repositories.*;
 import com.carl.resale.util.FileUtils;
 import com.carl.resale.util.StringUtil;
 import org.bson.types.ObjectId;
@@ -43,6 +37,9 @@ public class InitDataCtrl extends BaseCtrl {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private HotAdvantageRepository hotAdvantageRepository;
 
     @Override
     protected String getModuleName() {
@@ -135,7 +132,7 @@ public class InitDataCtrl extends BaseCtrl {
      * @return
      */
     @RequestMapping("publishAdvantage")
-    public String publishAdvantage(Advantage advantage, @RequestParam(value = "file", required = false) MultipartFile file, Model model)
+    public String publishAdvantage(Advantage advantage, @RequestParam(value = "file", required = false) MultipartFile file,int isHot, Model model)
             throws Exception {
         final String business = advantage.getBusiness();
         SysArea area = sysAreaRepository.findAll().get(0);
@@ -166,6 +163,15 @@ public class InitDataCtrl extends BaseCtrl {
         if (c != null)
             advantage.setSpecificType(c.getSpecTypes().get(1));
         advRepository.insert(advantage);
+
+        if(isHot == 1) {
+            HotAdvantage hotAdvantage = new HotAdvantage();
+            hotAdvantage.setAdvantage(advantage);
+            hotAdvantage.setOrder(1);
+            hotAdvantage.setState(new State());
+            hotAdvantageRepository.insert(hotAdvantage);
+        }
+
         return THYMELEAFE + getWarpModuleName() + "publishAdvantage";
     }
 

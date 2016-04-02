@@ -18,35 +18,6 @@
         </form>
     </div>
 
-    <#--<div class="range">
-        <h3 class="sear-head">Price range</h3>
-        <ul class="dropdown-menu6">
-            <li>
-
-                <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header" style="left: 0.555556%; width: 66.1111%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.555556%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 66.6667%;"></a></div>
-                <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;">
-            </li>
-        </ul>
-        <!--&ndash;&gt;
-        <script type="text/javascript" src="js/lib/jquery/jquery-ui.js"></script>
-        <link rel="stylesheet" href="styles/common/jquery-ui1.css"/>
-        <script type="text/javascript">//<![CDATA[
-        $(window).load(function(){
-            $( "#slider-range" ).slider({
-                range: true,
-                min: 0,
-                max: 9000,
-                values: [ 50, 6000 ],
-                slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-                }
-            });
-            $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-
-        });//]]>
-
-        </script>
-
-    </div>-->
 <#if result.categoryDetail?? && result.categoryDetail.specTypes>
     <div class="brand-select">
         <h3 class="sear-head">Brand name</h3>
@@ -63,47 +34,30 @@
 </#if>
 
     <div class="featured-ads">
-        <h2 class="sear-head fer">Featured Ads</h2>
+        <h2 class="sear-head fer">推荐广告${result.listHotAdv?size}</h2>
+        <#list result.listHotAdv as ha>
+            <div class="featured-ad">
+                <a href="single.html">
+                    <div class="featured-ad-left">
+                        <img
+                                class="hot_lazy"
+                                data-original="file/img/${ha.advantage.previewImage.id}.${ha.advantage.previewImage.type}"  alt="">
+                    </div>
+                    <div class="featured-ad-right">
+                        <h4>${ha.advantage.title}</h4>
 
-        <div class="featured-ad">
-            <a href="single.html">
-                <div class="featured-ad-left">
-                    <img src="images/f1.jpg" title="ad image" alt="">
-                </div>
-                <div class="featured-ad-right">
-                    <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
-
-                    <p>$ 450</p>
-                </div>
-                <div class="clearfix"></div>
-            </a>
-        </div>
-        <div class="featured-ad">
-            <a href="single.html">
-                <div class="featured-ad-left">
-                    <img src="images/f2.jpg" title="ad image" alt="">
-                </div>
-                <div class="featured-ad-right">
-                    <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
-
-                    <p>$ 380</p>
-                </div>
-                <div class="clearfix"></div>
-            </a>
-        </div>
-        <div class="featured-ad">
-            <a href="single.html">
-                <div class="featured-ad-left">
-                    <img src="images/f3.jpg" title="ad image" alt="">
-                </div>
-                <div class="featured-ad-right">
-                    <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
-
-                    <p>$ 560</p>
-                </div>
-                <div class="clearfix"></div>
-            </a>
-        </div>
+                        <p>￥${ha.advantage.price}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </div>
+        </#list>
         <div class="clearfix"></div>
     </div>
 </div>
+<script type="application/javascript">
+    ;
+    (function () {
+        $("img.hot_lazy").lazyload({effect: "fadeIn"});
+    })();
+</script>

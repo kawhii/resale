@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="styles/common/bootstrap-select.css"/>
 <script type="application/javascript" src="js/common/bootstrap.min.js"></script>
 <script type="application/javascript" src="js/common/bootstrap-select.js"></script>
+<script type="application/javascript" src="js/lib/jquery-lazyload/jquery.lazyload.js"></script>
 <div class="total-ads main-grid-border">
     <div class="container">
     <#--这里包含是指spring mvc设置的views路径开始的-->

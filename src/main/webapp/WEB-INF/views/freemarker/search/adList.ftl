@@ -7,7 +7,6 @@
  @modify
  版权所有.(c)2008-2016.广州市森锐电子科技有限公司
  -->
-<script type="application/javascript" src="js/lib/jquery-lazyload/jquery.lazyload.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var elem = $('#container ul');

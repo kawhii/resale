@@ -7,7 +7,7 @@ package com.carl.resale.ui.bean;
  * @modify 版权所有.(c)2008-2016.广州市森锐电子科技有限公司
  */
 public class State {
-    private String code;
+    private String code = "1";
     private String note;
 
     public String getCode() {

@@ -1,6 +1,7 @@
 package com.carl.resale.ui.service.impl;
 
 import com.carl.resale.ui.bean.*;
+import com.carl.resale.ui.repositories.HotAdvantageRepository;
 import com.carl.resale.ui.service.IAdvantageService;
 import com.carl.resale.ui.service.ICategoryService;
 import com.carl.resale.ui.service.IClassifiedsSearchService;
@@ -42,6 +43,9 @@ public class ClassifiedsSearchService implements IClassifiedsSearchService {
     @Autowired
     private IAdvantageService advantageService;
 
+    @Autowired
+    private HotAdvantageRepository hotAdvantageRepository;
+
     @Override
     public Map<String, Object> search(ClassifiedsSearchParam param) {
         Map<String, Object> result = new HashMap<String, Object>();
@@ -49,6 +53,8 @@ public class ClassifiedsSearchService implements IClassifiedsSearchService {
         List<SysArea> area = areaService.findAllHighest();
         //如果全部，才进行获取
         List<Category> category = categoryService.getHomeCategory(50);
+        //热门广告
+        List<HotAdvantage> hotAdvantages = hotAdvantageRepository.getHomePageHotAdv();
         //获取页码
         int page = param.getPage();
         int pageSize = param.getPageSize();
@@ -94,6 +100,7 @@ public class ClassifiedsSearchService implements IClassifiedsSearchService {
         PageInfo<Advantage> body = advantageService.getList(page, pageSize, cityId, categoryId, specificTypeId, showTypeId, sort);
         result.put("listCategory", category);
         result.put("listArea", area);
+        result.put("listHotAdv", hotAdvantages);
         result.put("bars", bars);//导航栏
         result.put("body", body);
         return result;
