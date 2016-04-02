@@ -6,6 +6,7 @@ import com.carl.resale.ui.service.ICategoryService;
 import com.carl.resale.ui.service.IClassifiedsSearchService;
 import com.carl.resale.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,6 +31,9 @@ public class ClassifiedsSearchService implements IClassifiedsSearchService {
     protected static final String SPECIFIC_TYPE_ID = "specificTypeId";
     //展示类型
     protected static final String SHOW_TYPE_ID = "showTypeId";
+
+    //排序
+    protected static final String ORDER_ID = "order";
     @Autowired
     private AreaService areaService;
     @Autowired
@@ -63,6 +67,7 @@ public class ClassifiedsSearchService implements IClassifiedsSearchService {
             result.put(CATEGORY_ID, categoryId);
             result.put(SPECIFIC_TYPE_ID, specificTypeId);
             result.put(SHOW_TYPE_ID, showTypeId);
+            result.put(ORDER_ID, param.getOrder());
             if (!StringUtil.isNull(categoryId)) {
                 //如果有输入id查找详细
                 Category c = categoryService.findById(categoryId);
@@ -84,8 +89,9 @@ public class ClassifiedsSearchService implements IClassifiedsSearchService {
                 }
             }
         }
+        Sort sort = new Sort(Sort.Direction.DESC, ClassifiedsSearchParam.getSortColumn(param.getOrder()));
         //查询列表信息
-        PageInfo<Advantage> body = advantageService.getList(page, pageSize, cityId, categoryId, specificTypeId, showTypeId, null);
+        PageInfo<Advantage> body = advantageService.getList(page, pageSize, cityId, categoryId, specificTypeId, showTypeId, sort);
         result.put("listCategory", category);
         result.put("listArea", area);
         result.put("bars", bars);//导航栏

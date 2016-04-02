@@ -70,8 +70,8 @@
                                 <div class="sort-by">
                                     <label>排序 : </label>
                                     <select onchange="javascript:window.location ='cf/search'+(window.location.search.replace(/&{0,1}order=\w{4}&{0,1}/g,'&').endWith('&')?window.location.search.replace(/&{0,1}order=\w{4}&{0,1}/g,'&')+'order=':window.location.search.replace(/&{0,1}order=\w{4}&{0,1}/g,'&')+'&order=')+this.value">
-                                        <option value="time">发布时间</option>
-                                        <option value="view">查看量</option>
+                                        <option value="time" <#if result.order == 'time'>selected</#if>>发布时间</option>
+                                        <option value="view" <#if result.order == 'view'>selected</#if>>查看量</option>
                                     </select>
                                 </div>
                             </div>
@@ -127,115 +127,7 @@
                         </div>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
-                    <div>
-                        <div id="container">
-                            <div class="view-controls-list" id="viewcontrols">
-                                <label>view :</label>
-                                <a class="gridview"><i class="glyphicon glyphicon-th"></i></a>
-                                <a class="listview active"><i class="glyphicon glyphicon-th-list"></i></a>
-                            </div>
-                            <div class="sort">
-                                <div class="sort-by">
-                                    <label>Sort By : </label>
-                                    <select>
-                                        <option value="">Most recent</option>
-                                        <option value="">Price: Rs Low to High</option>
-                                        <option value="">Price: Rs High to Low</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <ul class="list">
-                            <#--<#if result.body?? && result.body.rows>
-                                <#list result.body.rows as r>
-                                    <#if r.previewImage.id??>
-                                        <a href="cf/search?categoryId=${r.category.id}&specificTypeId=${r.specificType.id}">
-                                            <li>
-                                                <img class="lazy"
-                                                     data-original="file/img/${r.previewImage.id}.${r.previewImage.type}"
-                                                     alt=""/>
-                                                <section class="list-left">
-                                                    <h5 class="title">${r.title}</h5>
-                                                    <span class="adprice">￥${r.price}</span>
-
-                                                    <p class="catpath">${r.category.name} » ${r.specificType.name}</p>
-                                                </section>
-                                                <section class="list-right">
-                                                    <span class="date"><#if r.publishTimeType == 0>
-                                                        今天<#elseif r.publishTimeType == 1>
-                                                        昨天<#elseif r.publishTimeType == 2>前天<#else>以前</#if>
-                                                        , ${r.publishTime?string("HH:mm")}
-                                                        <span class="cityname">${r.area.name}</span>
-                                                </section>
-                                                <div class="clearfix"></div>
-                                            </li>
-                                        </a>
-                                    </#if>
-                                </#list>
-                            </#if>-->
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="samsa" aria-labelledby="samsa-tab">
-                    <div>
-                        <div id="container">
-                            <div class="view-controls-list" id="viewcontrols">
-                                <label>view :</label>
-                                <a class="gridview"><i class="glyphicon glyphicon-th"></i></a>
-                                <a class="listview active"><i class="glyphicon glyphicon-th-list"></i></a>
-                            </div>
-                            <div class="sort">
-                                <div class="sort-by">
-                                    <label>Sort By : </label>
-                                    <select>
-                                        <option value="">Most recent</option>
-                                        <option value="">Price: Rs Low to High</option>
-                                        <option value="">Price: Rs High to Low</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <ul class="list">
-                            <#if result.body?? && result.body.rows>
-                                <#list result.body.rows as r>
-                                    <#if !r.previewImage.id??>
-                                        <a href="single.html">
-                                            <li>
-                                                <section class="list-left">
-                                                    <h5 class="title">${r.title}</h5>
-
-                                                    <p class="catpath">${r.category.name} » ${r.specificType.name}</p>
-                                                </section>
-                                                <section class="list-right">
-                                                    <span class="date"><#if r.publishTimeType == 0>
-                                                        今天<#elseif r.publishTimeType == 1>
-                                                        昨天<#elseif r.publishTimeType == 2>前天<#else>以前</#if>
-                                                        , ${r.publishTime?string("HH:mm")}</span>
-                                                    <span class="cityname">${r.area.name}</span>
-                                                </section>
-                                                <div class="clearfix"></div>
-                                            </li>
-                                        </a>
-                                    </#if>
-                                </#list>
-                            </#if>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
                 <ul class="pagination pagination-sm">
-                <#-- <li><a href="#">Prev</a></li>
-                 <li><a href="#">1</a></li>
-                 <li><a href="#">2</a></li>
-                 <li><a href="#">3</a></li>
-                 <li><a href="#">4</a></li>
-                 <li><a href="#">5</a></li>
-                 <li><a href="#">6</a></li>
-                 <li><a href="#">7</a></li>
-                 <li><a href="#">8</a></li>
-                 <li><a href="#">Next</a></li>-->
                     <#include "freemarker/common/pageBar.ftl"/>
                 </ul>
             </div>

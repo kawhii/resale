@@ -161,7 +161,7 @@ public class InitDataCtrl extends BaseCtrl {
         Category c = categoryRepository.findAll().get(1);
         advantage.setCategory(c);
         if (c.getSpecTypes() != null) {
-            advantage.setShowType(c.getShowTypes().get(0).getId());
+            advantage.setShowType(c.getShowTypes().get(1).getId());
         }
         if (c != null)
             advantage.setSpecificType(c.getSpecTypes().get(1));
