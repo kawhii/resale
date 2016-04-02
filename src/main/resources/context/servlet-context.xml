@@ -118,6 +118,7 @@
                     <property name="exposeRequestAttributes" value="true"/>
                     <property name="exposeSessionAttributes" value="true"/>
                     <property name="exposeSpringMacroHelpers" value="true"/>
+                    <property name="requestContextAttribute" value="request"/>
                     <!--
                     <property name="prefix" value="${freemarker.prefix}"/>
                     -->

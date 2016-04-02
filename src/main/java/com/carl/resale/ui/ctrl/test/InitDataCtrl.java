@@ -7,9 +7,12 @@ import com.carl.resale.ui.bean.SysArea;
 import com.carl.resale.ui.bean.SysFile;
 import com.carl.resale.ui.ctrl.BaseCtrl;
 import com.carl.resale.ui.repositories.AdvantageRepository;
+import com.carl.resale.ui.repositories.CategoryRepository;
 import com.carl.resale.ui.repositories.SysAreaRepository;
 import com.carl.resale.ui.repositories.SysFileRepository;
 import com.carl.resale.util.FileUtils;
+import com.carl.resale.util.StringUtil;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +41,9 @@ public class InitDataCtrl extends BaseCtrl {
     @Autowired
     private AdvantageRepository advRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     protected String getModuleName() {
         return "init-data";
@@ -45,6 +51,7 @@ public class InitDataCtrl extends BaseCtrl {
 
     /**
      * 转发上传文件
+     *
      * @param model
      * @return
      */
@@ -58,6 +65,7 @@ public class InitDataCtrl extends BaseCtrl {
 
     /**
      * 转发上传文件
+     *
      * @param model
      * @return
      */
@@ -71,6 +79,7 @@ public class InitDataCtrl extends BaseCtrl {
 
     /**
      * 单一上传文件
+     *
      * @param file
      * @param request
      * @return
@@ -81,7 +90,7 @@ public class InitDataCtrl extends BaseCtrl {
         logger.info(file.getOriginalFilename());
         logger.info(file.getContentType());
         logger.info(file.getSize());
-       FileUtils.save(file, new FilePathAdapter() {
+        FileUtils.save(file, new FilePathAdapter() {
             @Override
             public String path() {
                 return "tyle";
@@ -93,6 +102,7 @@ public class InitDataCtrl extends BaseCtrl {
 
     /**
      * 添加品牌上次文件
+     *
      * @param brand
      * @param file
      * @param model
@@ -121,6 +131,7 @@ public class InitDataCtrl extends BaseCtrl {
 
     /**
      * 广告发布
+     *
      * @return
      */
     @RequestMapping("publishAdvantage")
@@ -129,24 +140,38 @@ public class InitDataCtrl extends BaseCtrl {
         final String business = advantage.getBusiness();
         SysArea area = sysAreaRepository.findAll().get(0);
         advantage.setArea(area);
-        SysFile sysFile = FileUtils.save(file, new FilePathAdapter() {
-            @Override
-            public String path() {
-                return business;
-            }
-        });
-        fileRepository.insert(sysFile);
-        advantage.setPreviewImage(sysFile);
+        SysFile sysFile = null;
+        if (file != null && file.getSize() > 0) {
+            sysFile = FileUtils.save(file, new FilePathAdapter() {
+                @Override
+                public String path() {
+                    return business;
+                }
+            });
+        }
+        if (sysFile != null) {
+            fileRepository.insert(sysFile);
+            advantage.setPreviewImage(sysFile);
+        }
+
         List<SysFile> files = new ArrayList<SysFile>();
         files.add(sysFile);
         files.add(sysFile);
         advantage.setDisplayImgs(files);
+        Category c = categoryRepository.findAll().get(1);
+        advantage.setCategory(c);
+        if (c.getSpecTypes() != null) {
+            advantage.setShowType(c.getShowTypes().get(0).getId());
+        }
+        if (c != null)
+            advantage.setSpecificType(c.getSpecTypes().get(1));
         advRepository.insert(advantage);
         return THYMELEAFE + getWarpModuleName() + "publishAdvantage";
     }
 
     /**
      * 目录上次图片
+     *
      * @param model
      * @return
      */
@@ -158,6 +183,7 @@ public class InitDataCtrl extends BaseCtrl {
 
     /**
      * 目录上次图片
+     *
      * @param model
      * @return
      */

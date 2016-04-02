@@ -14,13 +14,22 @@ public class ClassifiedsSearchParam {
     /**
      * 默认24个一页
      */
-    public static final int DEFAULT_PAGE_SIZE = 24;
+    public static final int DEFAULT_PAGE_SIZE = 6;
     private String cityId;
     private String categoryId;
     private int pageSize = DEFAULT_PAGE_SIZE;
     private int page = DEFAULT_PAGE;
     private String order;
     private String specificTypeId;
+    private String showTypeId;//tab 标签id
+
+    public String getShowTypeId() {
+        return showTypeId;
+    }
+
+    public void setShowTypeId(String showTypeId) {
+        this.showTypeId = showTypeId;
+    }
 
     public String getCityId() {
         return cityId;

@@ -20,9 +20,10 @@ public interface IAdvantageService {
      * @param cityId 城市
      * @param categoryId 目录
      * @param specificTypeId 指定类型
+     * @param showTypeId tab展示类型
      * @param order 排序字段
      * @return
      */
-    public PageInfo<Advantage> getList(int page, int pageSize, String cityId, String categoryId, String specificTypeId, Sort order);
+    public PageInfo<Advantage> getList(int page, int pageSize, String cityId, String categoryId, String specificTypeId,String showTypeId, Sort order);
 
 }

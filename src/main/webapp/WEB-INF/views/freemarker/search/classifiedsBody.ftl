@@ -12,9 +12,11 @@
 <script type="application/javascript" src="js/common/bootstrap-select.js"></script>
 <div class="total-ads main-grid-border">
     <div class="container">
-        <#--这里包含是指spring mvc设置的views路径开始的-->
+    <#--这里包含是指spring mvc设置的views路径开始的-->
         <#include "freemarker/search/searchBar.ftl"/>
-        <#include "freemarker/search/categories.ftl"/>
+        <#if !result.categoryId??>
+            <#include "freemarker/search/categories.ftl"/>
+        </#if>
         <#include "freemarker/search/navBar.ftl"/>
         <#include "freemarker/search/advGrid.ftl"/>
     </div>

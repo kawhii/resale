@@ -25,11 +25,12 @@ public class AdvantageService implements IAdvantageService {
     private AdvantageDao advantageDao;
 
     @Override
-    public PageInfo<Advantage> getList(int page, int pageSize, String cityId, String categoryId, String specificTypeId, Sort order) {
+    public PageInfo<Advantage> getList(int page, int pageSize, String cityId, String categoryId, String specificTypeId, String showTypeId, Sort order) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("cityId", cityId);
         param.put("categoryId", categoryId);
         param.put("specificTypeId", specificTypeId);
+        param.put("showTypeId", showTypeId);
         param.put("order", order);
         return advantageDao.getList(page, pageSize, param);
     }

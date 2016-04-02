@@ -31,9 +31,10 @@ public class AdvantageDao extends BaseDao implements IAdvantageDao, IPageSearch<
     @Override
     public PageInfo<Advantage> getList(int page, int pageSize, Map<String, Object> stringObjectMap) {
         Query query = new Query();
-        String categoryId = (String) stringObjectMap.get("stringObjectMap");
+        String categoryId = (String) stringObjectMap.get("categoryId");
         String cityId = (String) stringObjectMap.get("cityId");
         String specificTypeId = (String) stringObjectMap.get("specificTypeId");
+        String showTypeId = (String) stringObjectMap.get("showTypeId");
         Sort order = (Sort) stringObjectMap.get("order");
         if (!StringUtil.isNull(cityId)) {
             query.addCriteria(where("area.$id").is(new ObjectId(cityId)));
@@ -43,25 +44,29 @@ public class AdvantageDao extends BaseDao implements IAdvantageDao, IPageSearch<
         }
 
         if (!StringUtil.isNull(specificTypeId)) {
-            query.addCriteria(where("specificType.$id").is(new ObjectId(specificTypeId)));
+            query.addCriteria(where("specific_type.$id").is(new ObjectId(specificTypeId)));
+        }
+        if (!StringUtil.isNull(showTypeId)) {
+            query.addCriteria(where("showType").is(new ObjectId(showTypeId)));
         }
         //计算总数
         long total = getMongoTemplate().count(query, Advantage.class);
         query.fields().include("id").include("business").
                 include("title").include("publishTime").
                 include("area").include("brand").include("specificType").
-                include("previewImage").include("category");
+                include("previewImage").include("category").include("price");
         //排序分页
         query.with(new PageRequest(page - 1, pageSize));
-        if (order != null) {
-            query.with(order);
+        if (order == null) {
+            order = new Sort(Sort.Direction.DESC, "publishTime");
         }
+        query.with(order);
         List<Advantage> rows = getMongoTemplate().find(query, Advantage.class);
         PageInfo info = new PageInfo();
         info.setOrder(order);
         info.setPage(page);
         info.setRows(rows);
-        info.setTotal(total);
+        info.setTotal((int)total);
         info.setPageSize(pageSize);
         return info;
     }

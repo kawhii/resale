@@ -5,6 +5,7 @@ import com.carl.resale.ui.bean.QCategory;
 import com.carl.resale.ui.bean.SpecificType;
 import com.carl.resale.ui.bean.State;
 import com.carl.resale.ui.repositories.CategoryRepository;
+import com.carl.resale.ui.repositories.SpecificTypeRepository;
 import org.bson.types.ObjectId;
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,14 +30,18 @@ public class TestCategory {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Qualifier("specificTypeRepository")
+    @Autowired
+    private SpecificTypeRepository specificTypeRepository;
+
     @Test
     public void testSave() {
         Category category = new Category();
-        category.setBusiness("businessId");
-        category.setCode("CU.MOBILE");
-        category.setName("手机");
-        category.setCssName("SR_table");
-        category.setOrder(1);
+        category.setBusiness("MOTORCYCLE");
+        category.setCode("CU.MOTORCYCLE");
+        category.setName("自行车");
+        category.setCssName("motorcycle");
+        category.setOrder(2);
         State state = new State();
         state.setCode("C");
         state.setNote("正常");
@@ -46,15 +51,32 @@ public class TestCategory {
         List<SpecificType> specTypes = new ArrayList<SpecificType>();
         SpecificType st1 = new SpecificType();
         st1.setCode("s1");
+        st1.setName("摩托车");
         st1.setGoodsCount(50);
         st1.setOrder(1);
         SpecificType st2 = new SpecificType();
         st2.setCode("s2");
+        st2.setName("独轮车");
         st2.setGoodsCount(50);
         st2.setOrder(2);
+        specificTypeRepository.insert(st1);
+        specificTypeRepository.insert(st2);
         specTypes.add(st1);
         specTypes.add(st2);
         category.setSpecTypes(specTypes);
+
+        Category.ShowType showType1 = new Category.ShowType();
+        showType1.setId(new ObjectId());
+        showType1.setTitle("全部照片");
+        showType1.setOrder(1);
+        Category.ShowType showType2 = new Category.ShowType();
+        showType2.setId(new ObjectId());
+        showType2.setTitle("公司内部");
+        showType2.setOrder(2);
+        List<Category.ShowType> types = new ArrayList<Category.ShowType>();
+        types.add(showType1);
+        types.add(showType2);
+        category.setShowTypes(types);
         categoryRepository.save(category);
         Assert.assertTrue(categoryRepository.exists(category.getId()));
     }

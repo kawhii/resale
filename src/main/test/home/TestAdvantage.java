@@ -10,6 +10,7 @@ import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.web.servlet.support.RequestContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,13 +48,14 @@ public class TestAdvantage extends BaseTest {
     @Test
     public void testFind() {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("publish_user.$id", new ObjectId("56fb9017cfd6a527286f4220"));
+        param.put("cityId", "56fa4328cfd6a51facddd94d");
+        param.put("categoryId", "56fc9bb0cfd6a5199ce51405");
         logger.debug(advantageDao.getList(1, 1,param));
     }
 
     @Test
     public void testFindByService() {
         Sort order = new Sort(Sort.Direction.DESC, "id");
-        logger.debug(advantageService.getList(1, 2, null, null, null, order));
+        logger.debug(advantageService.getList(1, 2, null, "56f7861612418812e8b28ec9", null, null, order));
     }
 }

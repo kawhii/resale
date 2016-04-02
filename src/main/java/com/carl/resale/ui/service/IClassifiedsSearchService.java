@@ -1,9 +1,7 @@
 package com.carl.resale.ui.service;
 
-import com.carl.resale.ui.bean.Advantage;
 import com.carl.resale.ui.bean.ClassifiedsSearchParam;
 
-import java.util.List;
 import java.util.Map;
 
 /**

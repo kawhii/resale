@@ -1,6 +1,7 @@
 package com.carl.resale.ui.bean;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -24,8 +25,20 @@ public class Category {
     @Field("goods_count") private int goodsCount;//广告总数
     @Field("image_id")private ObjectId imageId;
     @Field("image_type")private String imageType;
+    @DBRef
     @Field("spec_types") private List<SpecificType> specTypes;
     @Field("business_id") private String business;
+
+    @Field("show_types")
+    private List<ShowType> showTypes;
+
+    public List<ShowType> getShowTypes() {
+        return showTypes;
+    }
+
+    public void setShowTypes(List<ShowType> showTypes) {
+        this.showTypes = showTypes;
+    }
 
     public ObjectId getId() {
         return id;
@@ -129,6 +142,40 @@ public class Category {
                 ", imageId=" + imageId +
                 ", specTypes=" + specTypes +
                 ", business='" + business + '\'' +
+                ", showTypes='" + showTypes + '\'' +
                 '}';
+    }
+
+    /**
+     * 拥有哪些tab标签展示类型
+     */
+    public static class ShowType {
+        private ObjectId id;
+        private String title;
+        private int order;
+
+        public ObjectId getId() {
+            return id;
+        }
+
+        public void setId(ObjectId id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public int getOrder() {
+            return order;
+        }
+
+        public void setOrder(int order) {
+            this.order = order;
+        }
     }
 }

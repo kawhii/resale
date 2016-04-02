@@ -12,7 +12,7 @@ import java.util.List;
  * @modify 版权所有.(c)2008-2016.广州市森锐电子科技有限公司
  */
 public class PageInfo<O> {
-    private Long total;
+    private int total;
     private int page;
     private int pageSize;
     private List<O> rows;
@@ -26,14 +26,14 @@ public class PageInfo<O> {
         if(total == 0) {
             return 0;
         }
-        return (long) Math.ceil((double) (total / page));
+        return (long) Math.ceil(((float)total / (float)pageSize));
     }
 
-    public Long getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(Long total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 

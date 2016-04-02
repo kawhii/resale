@@ -31,8 +31,10 @@ public class Advantage {
     @DBRef
     private SysArea area;
     @Field("category")
+    @DBRef
     private Category category;
     @Field("specific_type")
+    @DBRef
     private SpecificType specificType;
     @Field("advantage_brand")
     private Brand brand;
@@ -50,6 +52,19 @@ public class Advantage {
     @DBRef
     private SysUser publishUser;
     private String condition;
+
+    /**
+     * 展示类型与，Category.ShowType.id
+     */
+    private ObjectId showType;
+
+    public ObjectId getShowType() {
+        return showType;
+    }
+
+    public void setShowType(ObjectId showType) {
+        this.showType = showType;
+    }
 
     /**
      * 获取现在离发布时间天数
