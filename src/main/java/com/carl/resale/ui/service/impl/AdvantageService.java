@@ -1,13 +1,14 @@
 package com.carl.resale.ui.service.impl;
 
-import com.carl.resale.ui.bean.Advantage;
-import com.carl.resale.ui.bean.PageInfo;
+import com.carl.resale.ui.bean.*;
 import com.carl.resale.ui.dao.impl.AdvantageDao;
 import com.carl.resale.ui.service.IAdvantageService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,5 +34,25 @@ public class AdvantageService implements IAdvantageService {
         param.put("showTypeId", showTypeId);
         param.put("order", order);
         return advantageDao.getList(page, pageSize, param);
+    }
+
+    @Override
+    public Advantage findById(String id) {
+        return advantageDao.findById(new ObjectId(id));
+    }
+
+    @Override
+    public List<NavBar> getBarFormAdv(Advantage advantage) {
+        List<NavBar> bars = new ArrayList<NavBar>();
+        bars.add(new NavBar(null, null, "目录"));
+        if(advantage != null) {
+            Category c = advantage.getCategory();
+            NavBar categoryBar = new NavBar("categoryId", c.getId().toString(), c.getName());
+            bars.add(categoryBar);
+            SpecificType specificType = advantage.getSpecificType();
+            NavBar sftBar = new NavBar("specificTypeId", specificType.getId().toString(), specificType.getName()).addChildren(categoryBar);
+            bars.add(sftBar);
+        }
+        return bars;
     }
 }

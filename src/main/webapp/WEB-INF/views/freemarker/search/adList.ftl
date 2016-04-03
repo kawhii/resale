@@ -79,7 +79,7 @@
                             <#if result.body?? && result.body.rows>
                                 <#list result.body.rows as r>
                                     <#if r.previewImage?? && r.previewImage.type??>
-                                        <a href="cf/search?categoryId=${r.category.id}&specificTypeId=${r.specificType.id}">
+                                        <a href="adv/detail/${r.id}.html">
                                             <li>
                                                 <img class="lazy"
                                                      data-original="file/img/${r.previewImage.id}.${r.previewImage.type}"
@@ -101,7 +101,7 @@
                                             </li>
                                         </a>
                                     <#else>
-                                        <a href="cf/search?categoryId=${r.category.id}&specificTypeId=${r.specificType.id}">
+                                        <a href="adv/detail/${r.id}.html">
                                             <li>
                                                 <section class="list-left">
                                                     <h5 class="title">${r.title}</h5>

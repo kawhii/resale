@@ -37,7 +37,7 @@
         <h2 class="sear-head fer">推荐广告${result.listHotAdv?size}</h2>
         <#list result.listHotAdv as ha>
             <div class="featured-ad">
-                <a href="single.html">
+                <a href="adv/detail/${ha.advantage.id}.html">
                     <div class="featured-ad-left">
                         <img
                                 class="hot_lazy"

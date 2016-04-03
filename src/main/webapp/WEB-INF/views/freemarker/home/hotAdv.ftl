@@ -5,7 +5,7 @@
             <#assign nextEnd=a_index+4>
         </#if>
             <div class="col-md-3 biseller-column">
-                <a href="single.html">
+                <a href="adv/detail/${a.advantage.id}.html">
                     <img src="file/img/${a.advantage.previewImage.id}.${a.advantage.previewImage.type}"/>
                     <span class="price">￥${a.advantage.price}</span>
                 </a>

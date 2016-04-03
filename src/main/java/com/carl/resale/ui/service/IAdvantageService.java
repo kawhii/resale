@@ -1,6 +1,7 @@
 package com.carl.resale.ui.service;
 
 import com.carl.resale.ui.bean.Advantage;
+import com.carl.resale.ui.bean.NavBar;
 import com.carl.resale.ui.bean.PageInfo;
 import org.springframework.data.domain.Sort;
 
@@ -26,4 +27,17 @@ public interface IAdvantageService {
      */
     public PageInfo<Advantage> getList(int page, int pageSize, String cityId, String categoryId, String specificTypeId,String showTypeId, Sort order);
 
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    public Advantage findById(String id);
+
+    /**
+     * 根据广告获取导航条
+     * @param advantage
+     * @return
+     */
+    public List<NavBar> getBarFormAdv(Advantage advantage);
 }

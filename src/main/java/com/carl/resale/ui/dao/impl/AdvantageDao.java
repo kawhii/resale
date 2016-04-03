@@ -28,6 +28,7 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 public class AdvantageDao extends BaseDao implements IAdvantageDao, IPageSearch<Advantage, Map<String, Object>> {
     @Autowired
     private AdvantageRepository advantageRepository;
+
     @Override
     public PageInfo<Advantage> getList(int page, int pageSize, Map<String, Object> stringObjectMap) {
         Query query = new Query();
@@ -66,8 +67,13 @@ public class AdvantageDao extends BaseDao implements IAdvantageDao, IPageSearch<
         info.setOrder(order);
         info.setPage(page);
         info.setRows(rows);
-        info.setTotal((int)total);
+        info.setTotal((int) total);
         info.setPageSize(pageSize);
         return info;
+    }
+
+    @Override
+    public Advantage findById(ObjectId id) {
+        return getMongoTemplate().findById(id, Advantage.class);
     }
 }
