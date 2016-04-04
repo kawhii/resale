@@ -1,5 +1,6 @@
 package com.carl.resale.ui.ctrl.test;
 
+import com.carl.resale.core.annotation.RequestLimit;
 import com.carl.resale.core.file.FilePathAdapter;
 import com.carl.resale.ui.bean.*;
 import com.carl.resale.ui.ctrl.BaseCtrl;
@@ -83,6 +84,7 @@ public class InitDataCtrl extends BaseCtrl {
      * @throws Exception
      */
     @RequestMapping("/uploadFile")
+    @RequestLimit(count=10,time=60000)
     public String uploadFile(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) throws Exception {
         logger.info(file.getOriginalFilename());
         logger.info(file.getContentType());
