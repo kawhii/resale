@@ -45,7 +45,7 @@ public class TaskTest {
                 .withIdentity("myTrigger", "group1")
                 .startNow()
                 .withSchedule(simpleSchedule()
-                        .withIntervalInSeconds(5)
+                        .withIntervalInSeconds(5).withMisfireHandlingInstructionNowWithExistingCount()
                         .repeatForever())
                 .build();
         JobDetail job2 = newJob(HelloJobDouble.class)
