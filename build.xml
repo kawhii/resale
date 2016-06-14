@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--java二进制码操作类-->
+<project name="JavaByteCodeOperate" basedir=".">
+    <!--加载配置文件-->
+    <loadproperties srcfile="JavaByteCodeOperate.properties"></loadproperties>
+    <!--依赖库路径-->
+    <path id="libPath">
+        <fileset dir="${servlet.lib.dir}" includes="**/*.jar"></fileset>
+        <fileset dir="${base.lib.dir}" includes="**/*.jar"></fileset>
+    </path>
+
+    <target name="clean" description="Delete all generated files">
+        <echo message="清除目录：${basedir}/${target.dir}"></echo>
+        <delete dir="${target.dir}" failonerror="false"/>
+    </target>
+
+    <!--编译-->
+    <target name="compile" description="Compiles the Task" depends="clean">
+        <echo message="准备编译：${basedir}/${target.dir}"></echo>
+        <mkdir dir="${target.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${target.dir}" encoding="UTF-8">
+            <classpath>
+                <path refid="libPath"/>
+                <path location="${classes.dir}"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="clearJavaBody" depends="compile">
+        <echo message="清空java方法体"/>
+        <echo message="存放目录：${basedir}/${target.dir}"/>
+        <taskdef name="clearJavaMethodBody" classname="com.carl.task.ClearJavaBodyTask"
+                 classpath="${taskJava.dir}"
+                >
+            <classpath refid="libPath"/>
+        </taskdef>
+        <mkdir dir="${task.toPath}"/>
+        <clearJavaMethodBody
+                clearMethodBody="${task.clearMethodBody}"
+                clearConstructorBody="${task.clearConstructorBody}"
+                toPath="${task.toPath}"
+                clearPackageName="${target.dir}/${task.clearPackageName}"
+                />
+    </target>
+
+
+    <target name="test">
+        <echo message="${target.dir}"></echo>
+    </target>
+</project>

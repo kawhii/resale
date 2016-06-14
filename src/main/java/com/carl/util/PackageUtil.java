@@ -1,4 +1,4 @@
-package com.carl.resale.util;
+package com.carl.util;
 
 import java.io.File;
 import java.net.URL;
@@ -26,7 +26,7 @@ public class PackageUtil {
      * @return 类的完整名称
      */
     public static List<String> getClassNameByFile(String filePath, List<String> className, boolean childPackage) {
-        List<String> myClassName = new ArrayList<String>();
+        List<String> myClassName = new ArrayList();
         File file = new File(filePath);
         File[] childFiles = file.listFiles();
         for (File childFile : childFiles) {
@@ -90,7 +90,7 @@ public class PackageUtil {
      * @return 类的完整名称
      */
     public static List<String> getClassNameByJar(String jarPath, boolean childPackage) {
-        List<String> myClassName = new ArrayList<String>();
+        List<String> myClassName = new ArrayList();
         String[] jarInfo = jarPath.split("!");
         String jarFilePath = jarInfo[0].substring(jarInfo[0].indexOf("/"));
         String packagePath = jarInfo[1].substring(1);
@@ -136,7 +136,7 @@ public class PackageUtil {
      * @return 类的完整名称
      */
     private static List<String> getClassNameByJars(URL[] urls, String packagePath, boolean childPackage) {
-        List<String> myClassName = new ArrayList<String>();
+        List<String> myClassName = new ArrayList();
         if (urls != null) {
             for (int i = 0; i < urls.length; i++) {
                 URL url = urls[i];
