@@ -4,6 +4,9 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import java.beans.Introspector;
+import java.util.Map;
+
 /**
  * @author Carl
  * @date 2016/4/9
@@ -12,6 +15,8 @@ import org.quartz.JobExecutionException;
 public class HelloJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        Map<String, Object> s = jobExecutionContext.getMergedJobDataMap();
         System.out.println("HelloJob working");
+        jobExecutionContext.setResult("123");
     }
 }
