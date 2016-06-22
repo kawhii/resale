@@ -29,7 +29,7 @@ public class TaskTest {
         SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
         Scheduler sched = schedFact.getScheduler();
         Set<JobKey> keys = sched.getJobKeys(GroupMatcher.anyJobGroup());
-        sched.deleteJobs(new ArrayList<>(keys));
+        sched.deleteJobs(new ArrayList<JobKey>(keys));
       //  sched.getListenerManager().addJobListener(new MyJobListener("myJob"), jobGroupEquals("group1"));
         sched.start();
         JobDetail job = newJob(HelloJob.class).storeDurably()

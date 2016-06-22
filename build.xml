@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--java二进制码操作类-->
-<project name="JavaByteCodeOperate" basedir=".">
+<project name="JavaByteCodeOperate" basedir="." default="clearJavaBody">
     <!--加载配置文件-->
     <loadproperties srcfile="JavaByteCodeOperate.properties"></loadproperties>
     <!--依赖库路径-->
@@ -26,6 +26,7 @@
         </javac>
     </target>
 
+    <!--清空方法体-->
     <target name="clearJavaBody" depends="compile">
         <echo message="清空java方法体"/>
         <echo message="存放目录：${basedir}/${target.dir}"/>
@@ -41,10 +42,5 @@
                 toPath="${task.toPath}"
                 clearPackageName="${target.dir}/${task.clearPackageName}"
                 />
-    </target>
-
-
-    <target name="test">
-        <echo message="${target.dir}"></echo>
     </target>
 </project>
