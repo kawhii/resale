@@ -1,5 +1,9 @@
 package com.carl;
 
+import javassist.CannotCompileException;
+import javassist.ClassPool;
+import javassist.CtClass;
+
 import java.io.IOException;
 
 /**
@@ -11,6 +15,7 @@ import java.io.IOException;
  * 版权所有.(c)2008-2016.广州市森锐科技股份有限公司
  */
 public class SRClassLoader extends ClassLoader {
+    private ClassPool pool = ClassPool.getDefault();
     private ClassLoader parent;
     private JarPackReadFileAdapter adapter;
 
@@ -39,6 +44,17 @@ public class SRClassLoader extends ClassLoader {
             }
         }
         return loadClass(name, false);
+    }
+
+    @Override
+    protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+        try {
+            CtClass c = pool.get(name);
+            byte[] bytes = c.toBytecode();
+            return defineClass(name, bytes, 0, bytes.length);
+        } catch (Exception e) {
+            return parent.loadClass(name);
+        }
     }
 
     /**

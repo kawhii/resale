@@ -1,5 +1,6 @@
 package task;
 
+import javassist.CtClass;
 import org.quartz.*;
 import org.quartz.ee.servlet.QuartzInitializerListener;
 import org.quartz.impl.StdSchedulerFactory;
@@ -56,6 +57,7 @@ public class TaskTest {
         sched.triggerJob(jobKey("myJob1", "group1"));
         sched.triggerJob(jobKey("myJob1", "group1"));
         sched.triggerJob(jobKey("myJob1", "group1"));
+        CtClass c = null;
         /*
         Thread.sleep(3 * 1000);
         sched.deleteJob(jobKey("myJob", "group1"));*/
