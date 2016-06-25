@@ -1,5 +1,6 @@
 package task;
 
+import javassist.CtClass;
 import org.quartz.*;
 import org.quartz.ee.servlet.QuartzInitializerListener;
 import org.quartz.impl.StdSchedulerFactory;
@@ -29,7 +30,7 @@ public class TaskTest {
         SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
         Scheduler sched = schedFact.getScheduler();
         Set<JobKey> keys = sched.getJobKeys(GroupMatcher.anyJobGroup());
-        sched.deleteJobs(new ArrayList<>(keys));
+        sched.deleteJobs(new ArrayList<JobKey>(keys));
       //  sched.getListenerManager().addJobListener(new MyJobListener("myJob"), jobGroupEquals("group1"));
         sched.start();
         JobDetail job = newJob(HelloJob.class).storeDurably()
@@ -56,6 +57,7 @@ public class TaskTest {
         sched.triggerJob(jobKey("myJob1", "group1"));
         sched.triggerJob(jobKey("myJob1", "group1"));
         sched.triggerJob(jobKey("myJob1", "group1"));
+        CtClass c = null;
         /*
         Thread.sleep(3 * 1000);
         sched.deleteJob(jobKey("myJob", "group1"));*/
