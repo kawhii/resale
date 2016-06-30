@@ -15,9 +15,7 @@ public class TaskProperties {
         StdSchedulerFactory sf = new StdSchedulerFactory();
 
         sf.initialize(schedulerProperties);
-
         Scheduler scheduler = sf.getScheduler();
-
 // Scheduler will not execute jobs until it has been started (though they can be scheduled before start())
         scheduler.start();
     }
