@@ -122,11 +122,6 @@
             <artifactId>log4j</artifactId>
             <version>1.2.14</version>
         </dependency>
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongodb-driver</artifactId>
-            <version>${spring-mongodb.version}</version>
-        </dependency>
         <!--mongodb begin-->
         <dependency>
             <groupId>org.mongodb</groupId>
@@ -165,6 +160,13 @@
             <artifactId>shiro-web</artifactId>
             <version>1.2.4</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.2.4</version>
+        </dependency>
+
         <!--shiro end-->
         <!--<dependency>
             <groupId>org.mongodb</groupId>
@@ -239,6 +241,18 @@
             <scope>system</scope>
             <systemPath>${java.home}/lib/rt.jar</systemPath>
         </dependency>
+        <!--jersey begin-->
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>1.19.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-grizzly2</artifactId>
+            <version>1.19.1</version>
+        </dependency>
+        <!--jersey end-->
     </dependencies>
     <build>
         <finalName>resale</finalName>
