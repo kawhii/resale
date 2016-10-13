@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5"
-         xmlns="http://java.sun.com/xml/ns/javaee"
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
     <!-- 此Filter必需排在第一位 -->
     <filter>
         <filter-name>CoreFilter</filter-name>
         <filter-class>com.carl.resale.core.CoreFilter</filter-class>
+        <async-supported>true</async-supported>
     </filter>
     <filter-mapping>
         <filter-name>CoreFilter</filter-name>
@@ -23,6 +23,7 @@
     <filter>
         <filter-name>ShiroFilter</filter-name>
         <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+        <async-supported>true</async-supported>
     </filter>
 
     <filter-mapping>
@@ -51,6 +52,7 @@
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
         </init-param>
+        <async-supported>true</async-supported>
     </filter>
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
@@ -67,6 +69,7 @@
             <!--指定XML文件位置-->
         </init-param>
         <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
 
     </servlet>
     <servlet-mapping>

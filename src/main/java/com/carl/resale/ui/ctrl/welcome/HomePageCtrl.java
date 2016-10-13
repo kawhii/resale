@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.concurrent.Callable;
 
 /**
  * 首页控制器
@@ -41,6 +44,19 @@ public class HomePageCtrl extends BaseCtrl {
     public String indexBrand(Model model) {
         model.addAttribute("brands", categoryService.getHomeCategory(12));
         return FREEMARKER + getWarpModuleName() + "brand";
+    }
+
+    @RequestMapping("/response-body")
+    public @ResponseBody
+    Callable<String> callable() {
+
+        return new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                Thread.sleep(5000);
+                return "Callable result";
+            }
+        };
     }
 
     /**
