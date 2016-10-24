@@ -253,6 +253,16 @@
             <version>1.19.1</version>
         </dependency>
         <!--jersey end-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>0.32</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.1.0</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>resale</finalName>

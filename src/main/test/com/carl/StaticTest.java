@@ -23,10 +23,10 @@ public class StaticTest {
         }
     }*/
     {
-        System.out.println("111");
+      //  System.out.println("111");
     }
     static{
-        System.out.println("@!3123123");
+     //   System.out.println("@!3123123");
     }
 
     @Test
@@ -40,5 +40,40 @@ public class StaticTest {
         CtClass ctClass = pool.get("com.carl.StaticTest");
         for(CtMethod cm : ctClass.getDeclaredMethods()) {
         }
+    }
+
+    @Test
+    public void main() {
+        // PC WEB端
+        int pc = 1 << 0;// ...0001=1
+
+        // Android端
+        int android = 1 << 1;// ...0010=2
+
+        // iOS端
+        int ios = 1 << 2;// ...0100=4
+
+        // WindowsPhone
+        int wp = 1 << 3;// ...1000=8
+
+        //----------------校验开始-----------------
+        //表示只适用于PC WEB端
+        int pcAndAndroid = pc | android;
+        //判断是否有android端
+        System.out.println((pcAndAndroid & android) == android);// true
+        //判断是否有ios
+        System.out.println((pcAndAndroid & ios) == ios);// false
+        //去掉android，加入ios，判断是否有ios,   pcAndAndroid & (~android) 去掉android
+        System.out.println((((pcAndAndroid & (~android)) | ios) & ios) == ios);// true
+        //去掉android，加入ios，判断是否有android,  false
+        System.out.println((((pcAndAndroid & (~android)) | ios) & android) == android);// false
+
+        //--------------
+        // android/ios/win phone
+        int aiw = android | ios | wp;
+        //判断是否有android 并且有win phone
+        System.out.println((aiw & (android | wp)) == (android | wp));// true
+        //判断是否有android 并且有pc
+        System.out.println((aiw & (android | pc)) == (android | pc));// false
     }
 }
