@@ -5,16 +5,16 @@
     <artifactId>framework</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>resale Maven Webapp</name>
+    <name>framework Maven Webapp</name>
     <url>http://maven.apache.org</url>
+    <modules>
+        <module>breakfast-action</module>
+    </modules>
     <properties>
         <spring.version>4.2.5.RELEASE</spring.version>
         <spring-mongodb.version>3.0.2</spring-mongodb.version>
         <spring-data-mongodb.version>1.8.2.RELEASE</spring-data-mongodb.version>
-        <thymeleaf.version>2.1.2.RELEASE</thymeleaf.version>
-        <querydsl-mondogb.version>3.7.2</querydsl-mondogb.version>
         <freemarker.version>2.3.23</freemarker.version>
-        <outputDirectory>D:\carl\soft\java\apache-maven-3.1.1\outputDirectory\resale</outputDirectory>
     </properties>
     <repositories>
         <repository>
@@ -46,12 +46,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
