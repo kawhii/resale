@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
-    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
-    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <context:property-placeholder location="classpath:views.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:*_config.properties" ignore-unresolvable="true"/>
     <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 
     <!-- Enables the Spring MVC @Controller programming model -->
@@ -33,7 +26,7 @@
     <!-- 启用spring mvc 注解 -->
     <context:annotation-config/>
 
-    <context:component-scan base-package="com.carl.resale.ui.ctrl,com.carl.resale.config"/>
+    <context:component-scan base-package="com.carl.*"/>
 
     <!-- 配置基于Session的处理,将提交上来的locale参数进行处理 -->
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
@@ -49,26 +42,6 @@
         <property name="maxUploadSize" value="${file.maxUploadSize}"/>
         <!-- 最大内存大小 (10240)-->
         <property name="maxInMemorySize" value="${file.maxInMemorySize}" />
-    </bean>
-
-    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>-->
-
-    <!--thymeleaf 模板引擎-->
-    <bean id="templateResolver"
-          class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-        <property name="prefix" value="${thymeleaf.prefix}"/>
-        <property name="suffix" value="${thymeleaf.suffix}"/>
-        <property name="templateMode" value="${thymeleaf.templateMode}"/>
-        <property name="characterEncoding" value="${page.encoding}"/>
-    </bean>
-
-    <bean id="templateEngine"
-          class="org.thymeleaf.spring4.SpringTemplateEngine">
-        <property name="templateResolver" ref="templateResolver"/>
     </bean>
 
     <!-- Freemarker配置 -->
@@ -91,13 +64,6 @@
         <property name="useNotAcceptableStatusCode" value="true"/>
         <property name="viewResolvers">
             <list>
-                <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
-                    <property name="templateEngine" ref="templateEngine"/>
-                    <property name="characterEncoding" value="${page.encoding}"/>
-                    <property name="order" value="${thymeleaf.order}"/>
-                    <property name="viewNames" value="${thymeleaf.viewNames}"/>
-                </bean>
-
                 <!-- Default viewClass: JSTL view (JSP with html output)-->
                 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
                     <property name="prefix" value="${jsp.prefix}"/>
@@ -107,7 +73,6 @@
                 </bean>
 
                 <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-
                     <property name="viewClass"
                               value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
                     <property name="suffix" value="${freemarker.suffix}"/>
@@ -123,14 +88,7 @@
                     <property name="prefix" value="${freemarker.prefix}"/>
                     -->
                 </bean>
-                <bean class="org.springframework.web.servlet.view.script.ScriptTemplateViewResolver">
-                    <property name="viewClass"
-                              value="org.springframework.web.servlet.view.script.ScriptTemplateView"></property>
-                    <property name="suffix" value=".xhtml"/>
-                    <property name="prefix" value="/WEB-INF/views/"></property>
-                    <property name="viewNames" value="mustache/*"/>
-                    <property name="contentType" value="text/html;charset=utf-8"/>
-                </bean>
+
             </list>
         </property>
     </bean>

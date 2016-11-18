@@ -14,12 +14,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
  */
 public abstract class BaseCtrl {
     protected final Log logger = LogFactory.getLog(getClass());
-    @Autowired
-    protected MongoTemplate mongoTemplate;
-
-    public void setMongoTemplate(MongoTemplate mongoTemplate) {
-        this.mongoTemplate = mongoTemplate;
-    }
 
     /**
      * jsp 文件
@@ -55,5 +49,9 @@ public abstract class BaseCtrl {
      */
     protected String getWarpModuleName() {
         return SEPARATOR + getModuleName() + SEPARATOR;
+    }
+
+    protected String freemarker(String templateUrl) {
+        return FREEMARKER + getWarpModuleName() + templateUrl;
     }
 }
